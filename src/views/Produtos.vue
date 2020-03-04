@@ -55,8 +55,10 @@
                         <b-form-select id="nameFilter"
                                        class="filter filterSelect"
                                        @change="updateProducts"
-                                       v-model="orderBy" disabled>
-                            <b-form-select-option value="">Não implementado</b-form-select-option>
+                                       v-model="orderBy">
+                            <b-form-select-option value="name">Nome</b-form-select-option>
+                            <b-form-select-option value="lowest">Menor Valor</b-form-select-option>
+                            <b-form-select-option value="highest">Maior Valor</b-form-select-option>
                         </b-form-select>
                     </div>
                 </div>
@@ -73,6 +75,9 @@
                         Nenhum produto encontrado :(
                     </div>
                     <div class="col-12 flexCenterRow productsContainer m-auto">
+                        <div v-if="">
+
+                        </div>
                         <div v-for="prod of filteredProds" class="productContainer">
                                 <div class="flexCenterCol">
                                     <router-link :to="`/produtos/${prod.id}`">
@@ -136,7 +141,7 @@
                 filteredMaxPrice: null,
                 minPrice: null,
                 maxPrice: null,
-                orderBy: ""
+                orderBy: "name"
             }
         },
         computed: {
@@ -179,7 +184,7 @@
             filterProdList() {
                 this.filteredProds = [];
                 let filteredCatName, filteredSubcatName, filteredMaxPrice = this.filteredMaxPrice,
-                filteredName, filteredOff = this.filteredOff;
+                        filteredName, filteredOff = this.filteredOff;
                 if(this.filteredCat) {
                     for(let cat of this.catList) {
                         if(cat.id == this.filteredCat) {
@@ -228,6 +233,25 @@
                     }
                 }
             },
+            orderProducts(){
+                let filter;
+                if(this.orderBy == "name"){
+                    filter = (a,b) =>{
+                        return a.nome.localeCompare(b.nome, "pt", {sensitivity: 'base', ignorePunctuation: true})
+                    }
+                }
+                if(this.orderBy == "lowest"){
+                    filter = (a,b) =>{
+                        return a.valorPromocao.localeCompare(b.valorPromocao, undefined, {numeric: true, ignorePunctuation: true})
+                    }
+                }
+                if(this.orderBy == "highest"){
+                    filter = (a,b) =>{
+                        return a.valorPromocao.localeCompare(b.valorPromocao, undefined, {numeric: true, ignorePunctuation: true})*-1
+                    }
+                }
+                this.filteredProds = this.filteredProds.sort(filter)
+            },
             calculateMinMaxPrice() {
                 let minPrice = 0, maxPrice = 0;
                 for(let p of this.filteredProds) {
@@ -250,6 +274,7 @@
                 await this.loadSubcategories();
                 this.filterProdList();
                 this.calculateMinMaxPrice();
+                this.orderProducts();
                 await Aux.sleep(1000);
                 this.loading = false;
             },
@@ -315,6 +340,10 @@
         height: auto;
     }
 
+    #offFilter {
+        margin-left: 5px;
+    }
+
     .prodName {
         width: 100%;
         font-size: 14px;
@@ -331,8 +360,8 @@
         }
     }
 
-    #offFilter {
-        margin: 10px;
+    .offFilterInput {
+        margin-left: 10px !important;
     }
 
     .offFilterContainer {
