@@ -1,7 +1,9 @@
 <template>
   <div>
     <Header></Header>
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
     <Footer></Footer>
   </div>
 </template>
@@ -9,13 +11,15 @@
 <script>
   import Header from '@/components/Header/Header';
   import Footer from '@/components/Footer/Footer';
+  import SectionCollapse from '@/components/CollapseSection.vue';
 
   export default {
     name: 'App',
 
     components: {
         Header,
-        Footer
+        Footer,
+        SectionCollapse
     },
     computed: {
         currentRouteName() {

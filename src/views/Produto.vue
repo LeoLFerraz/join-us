@@ -188,7 +188,7 @@
                     tamanho: this.selectedSize
                 };
                 await axios.post(process.env.VUE_APP_API_HOST + ":" + process.env.VUE_APP_API_PORT + "/" + 'usuario/carrinho/adicionar/' + this.product.id, productData);
-                this.$eventHub.$emit('updatecart');
+                this.$eventHub.$emit('updatecartWOOpening');
                 this.$bvModal.show('modal-add-cart');
             }
         },

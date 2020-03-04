@@ -95,6 +95,7 @@
     - "Quem Viu, Viu Também" precisa de microinterações nos botões do carousel;
     - No carousel de fotos do Produto, fade-in e fade-out na troca de imagens;
     - Carrinho deve fechar on-blur, como a search results;
+      - DONE.
     - Degradé branco de filtro nas imgs de "Quem Viu, Viu Também";
     - Select de subcategorias deve ser atualizado e filtrado de acordo com a categoria selecionada;
     - O SectionCollapse deve funcionar sobre o router-view também, mas não criei o componente para esse caso de uso.

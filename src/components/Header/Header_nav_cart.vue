@@ -1,51 +1,53 @@
 <template>
-    <b-collapse v-model="visible" @open="openCart()" id="collapse-2">
-        <div class="label">
-            <p class="label-product">Produto</p>
-            <p class="label-quantity">Quantidade</p>
-        </div>
-        <div class="cart" v-on:updatecart="updateCart">
-            <vuescroll :ops="ops">
-                <div class="cart-cards" v-for="product in content">
-                    <div class="product">
-                        <div class="img-container">
-                            <img class="img-card" v-bind:src="require(`@/assets/svg/${product.pic}`)">
+    <div id="cartContainer" tabindex="0" @blur="closeCart">
+        <b-collapse v-model="visible" id="collapse-2">
+            <div class="label">
+                <p class="label-product" >Produto</p>
+                <p class="label-quantity">Quantidade</p>
+            </div>
+            <div class="cart" v-on:updatecart="updateCart">
+                <vuescroll :ops="ops">
+                    <div class="cart-cards" v-for="product in content">
+                        <div class="product">
+                            <div class="img-container">
+                                <img class="img-card" v-bind:src="require(`@/assets/svg/${product.pic}`)">
+                            </div>
+                            <div class="product-info-container">
+                                <p class="name">{{product.name}}</p>
+                                <p class="price">R${{product.price}}</p>
+                            </div>
                         </div>
-                        <div class="product-info-container">
-                            <p class="name">{{product.name}}</p>
-                            <p class="price">R${{product.price}}</p>
+                        <div class="quantity">
+                            <div class="quantity-button subtract-button" v-on:click="subtractProduct(product.id)">
+                                <img src="../../assets/svg/subtract.svg">
+                            </div>
+                            <div class="quantity-number">
+                                <p v-bind:id="`p${product.id}`">{{product.qtd}}</p>
+                            </div>
+                            <div class="quantity-button add-button" v-on:click="addProduct(product.id)">
+                                <img src="../../assets/svg/plus.svg">
+                            </div>
+                        </div>
+                        <div class="remove-btn" v-on:click="removeProduct(product.id, $event)">
+                            <img src="../../assets/svg/X.svg">
                         </div>
                     </div>
-                    <div class="quantity">
-                        <div class="quantity-button subtract-button" v-on:click="subtractProduct(product.id)">
-                            <img src="../../assets/svg/subtract.svg">
-                        </div>
-                        <div class="quantity-number">
-                            <p v-bind:id="`p${product.id}`">{{product.qtd}}</p>
-                        </div>
-                        <div class="quantity-button add-button" v-on:click="addProduct(product.id)">
-                            <img src="../../assets/svg/plus.svg">
-                        </div>
-                    </div>
-                    <div class="remove-btn" v-on:click="removeProduct(product.id, $event)">
-                        <img src="../../assets/svg/X.svg">
-                    </div>
+                </vuescroll>
+            </div>
+            <div class="shipping">
+                Faltam R$xx,xx para você Ganhar Frete Grátis
+            </div>
+            <div class="buy">
+                <div class="total-price">
+                    <p class="total">Total: R${{totalPrice}}</p>
+                    <p class="parcel">até 3x de R${{(totalPrice/3).toFixed(2)}} sem juros</p>
                 </div>
-            </vuescroll>
-        </div>
-        <div class="shipping">
-            Faltam R$xx,xx para você Ganhar Frete Grátis
-        </div>
-        <div class="buy">
-            <div class="total-price">
-                <p class="total">Total: R${{totalPrice}}</p>
-                <p class="parcel">até 3x de R${{(totalPrice/3).toFixed(2)}} sem juros</p>
+                <div class="button-container">
+                    <p>FINALIZAR COMPRA</p>
+                </div>
             </div>
-            <div class="button-container">
-                <p>FINALIZAR COMPRA</p>
-            </div>
-        </div>
-    </b-collapse>
+        </b-collapse>
+    </div>
 </template>
 
 <script>
@@ -146,12 +148,26 @@
             },
             openCart() {
                 this.visible = true;
+            },
+            async closeCart() {
+                await Aux.sleep(100);
+                this.visible = false;
+            }
+        },
+        watch: {
+            visible: function (val){
+                if (val){
+                    document.getElementById("cartContainer").focus();
+                }
             }
         },
         mounted: async function(){
             await this.updateCart();
             this.$eventHub.$on('updatecart', async data => {
                 this.openCart();
+                await this.updateCart();
+            });
+            this.$eventHub.$on('updatecartWOOpening', async data => {
                 await this.updateCart();
             });
         },

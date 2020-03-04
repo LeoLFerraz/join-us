@@ -8,7 +8,6 @@
                     <transition name="fade">
                         <b-spinner variant="primary" label="Spinning" class="loader" v-if="loading"></b-spinner>
                     </transition>
-
                     <SectionCollapse :collapsed="loading" class="w-100">
                         <main class="w-100 flexCenterRow">
                             <ul class="categoryList list-unstyled">
