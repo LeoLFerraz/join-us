@@ -77,3 +77,22 @@
     no componente de listagem de subcategorias.
     - Não achei solução para os nomes das categorias separados por sílabas que não fosse guardar as sílabas de cada categoria
     no "BD". A outra opção seria escrevê-los na mão, mas isso derrota o propósito da renderização dinâmica.
+
+  - **TODO List:**
+    - Responsividade para <1280px;
+    - Imgs da SubCat1 devem deixar de usar boxshadow (fica feio com os SVGs das subcats de sapatos);
+    - Homogeneizar como os SVGs/Imgs são inseridos nos templates;
+    - Links da SubCat2 estão sem microinterações, trazê-los para o padrão do resto do projeto;
+      - DONE. Mas como a especificação pedia os links já na primary-color, fiz com que on-hover fizesse eles secondary-actionable-color.
+    - Loader da tela de produto está no centro de 100vh, trazê-lo para o centro do container de main;
+    - Desabilitar ou desenvolver Order By na listagem de produtos;
+    - Adicionar msg quando nenhum produto for encontrado na tela de listagem de produtos;
+    - "Guia de Medidas" na tela de produtos precisa das microinterações de link e abrir um modal;
+    - "Quem Viu, Viu Também" precisa de nome nos produtos, apesar de não estar especificado;
+    - "Quem Viu, Viu Também" precisa de microinterações nos botões do carousel;
+    - No carousel de fotos do Produto, fade-in e fade-out na troca de imagens;
+    - Carrinho deve fechar on-blur, como a search results;
+    - Degradé branco de filtro nas imgs de "Quem Viu, Viu Também";
+    - Coisas que provavelmente não terei tempo de fazer:
+      - Container da search results deveria ter height máximo adaptado ao número de results;
+      - Tela de "Finalizar Compra";

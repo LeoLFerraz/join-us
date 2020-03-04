@@ -181,6 +181,16 @@
         color: $primary-color;
         font-size: 14px;
         line-height: 42px;
+        transition: all 0.6s ease;
+        .catName {
+            transition: all 0.6s ease;
+        }
+        &:hover {
+            transform: scale(1.07);
+            .catName {
+                color: $secondary-actionable-color;
+            }
+        }
     }
 
     .catList {

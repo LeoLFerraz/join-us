@@ -44,8 +44,9 @@
                         <label>Nome:</label>
                         <b-form-input id="nameFilter"
                                       type="text"
+                                      v-debounce:1s="updateProducts"
+                                      :debounce-events="['keydown']"
                                       class="filter filterSelect"
-                                      @change="updateProducts"
                                       v-model="filteredName"></b-form-input>
                     </div>
 
@@ -54,7 +55,9 @@
                         <b-form-select id="nameFilter"
                                        class="filter filterSelect"
                                        @change="updateProducts"
-                                       v-model="orderBy"></b-form-select>
+                                       v-model="orderBy" disabled>
+                            <b-form-select-option value="">Não implementado</b-form-select-option>
+                        </b-form-select>
                     </div>
                 </div>
 
@@ -66,6 +69,9 @@
                 </div>
 
                 <div class="row">
+                    <div v-if="!filteredProds[0]" class="primaryFont m-auto p-5 noProductFound">
+                        Nenhum produto encontrado :(
+                    </div>
                     <div class="col-12 flexCenterRow productsContainer m-auto">
                         <div v-for="prod of filteredProds" class="productContainer">
                                 <div class="flexCenterCol">
@@ -130,7 +136,7 @@
                 filteredMaxPrice: null,
                 minPrice: null,
                 maxPrice: null,
-                orderBy: null
+                orderBy: ""
             }
         },
         computed: {
@@ -265,6 +271,9 @@
 </script>
 
 <style lang="scss" scoped>
+    .noProductFound {
+        color: $canceled-color;
+    }
     .product-price{
         display: inline;
         font-size: 14px;
@@ -335,7 +344,6 @@
 
     .loader {
         position: absolute;
-        top: 50%;
         left: 50%;
         width: 4rem;
         height: 4rem;
