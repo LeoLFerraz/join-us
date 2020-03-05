@@ -1,6 +1,23 @@
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
 }
+
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+}
+
+.collapse-leave-active {
+    overflow: hidden;
+    max-height: 100vh;
+    transition: max-height .5s;
+}
+
+.collapse-enter-active {
+    overflow: visible;
+    max-height: 100vh;
+    transition: max-height .5s;
+}
+
+.collapse-enter, .collapse-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    max-height: 0vh;
 }
