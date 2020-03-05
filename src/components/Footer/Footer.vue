@@ -278,6 +278,12 @@
             color: $main-font-color;
             letter-spacing: normal;
             font-size: 14px;
+            transition: all 0.4s ease;
+            &:hover {
+                color: $primary-color;
+                cursor: pointer;
+                transform: scale(1.05);
+            }
         }
     }
 

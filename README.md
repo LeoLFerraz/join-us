@@ -99,7 +99,9 @@
     - Degradé branco de filtro nas imgs de "Quem Viu, Viu Também";
     - Select de subcategorias deve ser atualizado e filtrado de acordo com a categoria selecionada;
     - O SectionCollapse deve funcionar sobre o router-view também, mas não criei o componente para esse caso de uso;
+      - DONE (feito em transition, não com SectionCollapse).
     - Links do Footer;
+      - DONE.
     - Guardar em vetor as "sílabas" das categorias para fazer uma solução minimamente responsiva na tela de subcategoria;
     - Coisas que provavelmente não terei tempo de fazer:
       - Container da search results deveria ter height máximo adaptado ao número de results;
