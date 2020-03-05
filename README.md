@@ -80,7 +80,7 @@
 
   - **TODO List:**
     - Responsividade para <1280px;
-    - Imgs da SubCat1 devem deixar de usar boxshadow (fica feio com os SVGs das subcats de sapatos);
+    - Imgs da SubCat1 devem deixar de usar boxshadow (fica feio com os SVGs das subcats de sapatos e não ficou bom em geral com as imgs mesmo);
     - Homogeneizar como os SVGs/Imgs são inseridos nos templates;
     - Links da SubCat2 estão sem microinterações, trazê-los para o padrão do resto do projeto;
       - DONE. Mas como a especificação pedia os links já na primary-color, fiz com que on-hover fizesse eles secondary-actionable-color.
@@ -91,12 +91,14 @@
     - Adicionar msg quando nenhum produto for encontrado na tela de listagem de produtos;
       - DONE.
     - "Guia de Medidas" na tela de produtos precisa das microinterações de link e abrir um modal;
-    - "Quem Viu, Viu Também" precisa de nome nos produtos, apesar de não estar especificado;
+    - "Quem Viu, Viu Também" precisa de nome nos produtos;
+      - DONE.
     - "Quem Viu, Viu Também" precisa de microinterações nos botões do carousel;
     - No carousel de fotos do Produto, fade-in e fade-out na troca de imagens;
     - Carrinho deve fechar on-blur, como a search results;
       - DONE.
     - Degradé branco de filtro nas imgs de "Quem Viu, Viu Também";
+      - DONE.
     - Select de subcategorias deve ser atualizado e filtrado de acordo com a categoria selecionada;
     - O SectionCollapse deve funcionar sobre o router-view também, mas não criei o componente para esse caso de uso;
       - DONE (feito em transition, não com SectionCollapse).
@@ -106,3 +108,5 @@
     - Coisas que provavelmente não terei tempo de fazer:
       - Container da search results deveria ter height máximo adaptado ao número de results;
       - Tela de "Finalizar Compra";
+      - Quickview do "Quem Viu, Viu Também."
+      - Ao clicar na cor do produto em "Quem Viu, Viu Também", ir pra tela do produto com a cor já selecionada.

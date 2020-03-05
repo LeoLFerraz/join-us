@@ -59,11 +59,16 @@
                             <div class="col-sm-12 other-product-card-container flexCenterRow">
                                 <div class="other-product-card" v-for="product in productsPage">
                                     <router-link class="mainLink" v-bind:to="'/produtos/'+product.id">
-                                        <img v-bind:src="require('@/assets/svg/'+product.foto)">
-                                        <div class="other-product-card-footer">
-                                            <div class="other-product-info">R${{product.valorPromocao}}</div>
-                                            <div class="other-product-card-color" v-for="color in product.cor" v-bind:style="'background-color:'+color.codigo"></div>
+                                        <div class="whiteFilterContainer">
+                                            <div class="whiteFilter">
+                                                <span class="whiteFilterProductName"> {{product.nome}} </span>
+                                            </div>
+                                            <img v-bind:src="require('@/assets/svg/'+product.foto)">
                                         </div>
+                                            <div class="other-product-card-footer">
+                                                <div class="other-product-info">R${{product.valorPromocao}}</div>
+                                                <div class="other-product-card-color" v-for="color in product.cor" v-bind:style="'background-color:' + color.codigo"></div>
+                                            </div>
                                     </router-link>
                                 </div>
                             </div>
@@ -212,6 +217,7 @@
             cursor: pointer;
         }
     }
+
     .carousel{
         margin-top: 12px;
         margin-bottom: 21px;
@@ -219,10 +225,12 @@
             margin-top: 9px;
         }
     }
+
     .big{
         width: auto;
         height: 527px;
     }
+
     .info-container{
         font-family: $secondary-font;
         font-size: 14px;
@@ -237,10 +245,42 @@
         background-color: $bg-color;
         max-width: 444px;
     }
+
     .product-container{
         margin: 10px 0 140px 0;
     }
 
+    .whiteFilterContainer {
+        position: relative;
+        width: 100%;
+        &:hover {
+            .whiteFilter {
+                height: 0;
+            }
+        }
+    }
+
+    .whiteFilter {
+        position: absolute;
+        width: 100%;
+        overflow: hidden;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        height: 10%;
+        background: rgb(255,0,0);
+        background: linear-gradient(180deg, rgba(255,0,0,0) 0%, rgba(255,255,255,1) 100%);
+        transition: all 0.5s ease;
+        padding: 4px 0;
+    }
+
+    .whiteFilterProductName {
+        display: block;
+        font-family: $secondary-font;
+        color: $main-font-color;
+        font-size: 14px;
+        padding: 3px;
+    }
 
     .loader {
         position: absolute;
